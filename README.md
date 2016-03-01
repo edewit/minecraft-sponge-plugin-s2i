@@ -7,8 +7,8 @@ of the base image for deploying Spring Boot applications as reproducible Docker
 images. The resulting images can be run either by [Docker](http://docker.io)
 or using [S2I](https://github.com/openshift/source-to-image).
 
-This image is heavily inspired by the awesome [openshift/ruby-20-centos](https://github.com/openshift/ruby-20-centos/)
-builder image.
+This image is heavily inspired by the awesome [openshift/sti-ruby](https://github.com/openshift/sti-ruby/),
+builder images.
 
 Installation
 ---------------
