@@ -131,7 +131,7 @@ test_connection() {
 prepare
 
 info "Testing STI incremental build"
-run_sti_build
+run_s2i_build
 check_result $?
 
 # Verify the 'usage' script is working properly
