@@ -5,7 +5,7 @@ This repository contains the sources and
 [Dockerfile](https://github.com/codecentric/springboot-maven3-centos/blob/master/Dockerfile)
 of the base image for deploying Spring Boot applications as reproducible Docker
 images. The resulting images can be run either by [Docker](http://docker.io)
-or using [STI](https://github.com/openshift/source-to-image).
+or using [S2I](https://github.com/openshift/source-to-image).
 
 This image is heavily inspired by the awesome [openshift/ruby-20-centos](https://github.com/openshift/ruby-20-centos/)
 builder image.
@@ -18,9 +18,9 @@ _TODO_ Publish Image to Docker Hub
 Repository organization
 ------------------------
 
-* **`.sti/bin/`**
+* **`s2i/bin/`**
 
-  This folder contains scripts that are run by [STI](https://github.com/openshift/source-to-image):
+  This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
 
   *   **assemble**
 
@@ -51,13 +51,6 @@ Environment variables
     application GIT repository. In case your application is located in a
     sub-folder, you can set this variable to a *./myapplication*.
 
-*  **STI_SCRIPTS_URL** (default: '[.sti/bin](https://raw.githubusercontent.com/codecentric/springboot-maven3-centos/master/.sti/bin)')
-
-    This variable specifies the location of directory, where *assemble*, *run* and
-    *save-artifacts* scripts are downloaded/copied from. By default the scripts
-    in this repository will be used, but users can provide an alternative
-    location and run their own scripts.
-
 Contributing
 ------------
 
@@ -76,10 +69,10 @@ Usage
 
 **Building the [spring-boot-example](https://github.com/codecentric/spring-boot-example) Spring Boot application..**
 
-1. **using standalone [STI](https://github.com/openshift/source-to-image) and running the resulting image by [Docker](http://docker.io):**
+1. **using standalone [S2I](https://github.com/openshift/source-to-image) and running the resulting image by [Docker](http://docker.io):**
 
 ```
-$ sti build git://github.com/codecentric/spring-boot-example codecentric/springboot-maven3-centos spring-boot-app
+$ s2i build git://github.com/codecentric/spring-boot-example codecentric/springboot-maven3-centos spring-boot-app
 $ docker run -p 8080:8080 spring-boot-app
 ```
 

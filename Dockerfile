@@ -5,6 +5,13 @@
 
 FROM centos:centos7
 
+# Location of the STI scripts inside the image
+#
+LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
+
+# Path to be used in other layers to place s2i scripts into
+ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
+
 ENV JAVA_VERSON 1.8.0
 ENV MAVEN_VERSION 3.3.9
 
@@ -21,12 +28,7 @@ ENV JAVA_HOME /usr/lib/jvm/java
 ENV MAVEN_HOME /usr/share/maven
 
 # Add configuration files, bashrc and other tweaks
-ADD ./.sti/bin/usage /opt/java/bin/
-
-# Default STI scripts url
-ENV STI_SCRIPTS_URL https://raw.githubusercontent.com/codecentric/springboot-maven3-centos/master/.sti/bin
-# Default destination of scripts and sources, this is where assemble will look for them
-ENV STI_LOCATION /tmp
+ADD ./s2i/bin/ $STI_SCRIPTS_PATH
 
 # Create 'ruby' account we will use to run Ruby application
 # Add support for '#!/usr/bin/ruby' shebang.
@@ -51,4 +53,5 @@ USER        java
 
 EXPOSE 8080
 
-CMD ["/opt/java/bin/usage"]
+# Set the default CMD to print the usage of the language image
+CMD $STI_SCRIPTS_PATH/usage

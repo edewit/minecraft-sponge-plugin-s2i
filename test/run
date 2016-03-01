@@ -13,9 +13,9 @@ image_dir=$(readlink -zf ${test_dir}/..)
 scripts_url="file://${image_dir}/.sti/bin"
 cid_file=$(mktemp -u --suffix=.cid)
 
-# Since we built the candidate image locally, we don't want STI attempt to pull
+# Since we built the candidate image locally, we don't want S2I attempt to pull
 # it from Docker hub
-sti_args="-s ${scripts_url}"
+s2i_args="--force-pull=false"
 
 # TODO: This should be part of the image metadata
 test_port=8080
@@ -36,8 +36,8 @@ container_ip() {
   docker inspect --format="{{ .NetworkSettings.IPAddress }}" $(cat $cid_file)
 }
 
-run_sti_build() {
-  sti build ${sti_args} file://${test_dir}/test-app ${IMAGE_NAME} ${IMAGE_NAME}-testapp
+run_s2i_build() {
+  s2i build ${sti_args} file://${test_dir}/test-app ${IMAGE_NAME} ${IMAGE_NAME}-testapp
 }
 
 prepare() {
@@ -95,9 +95,14 @@ wait_for_cid() {
   done
 }
 
-test_usage() {
+test_s2i_usage() {
   info "Testing the 'sti usage' command"
-  sti usage ${sti_args} ${IMAGE_NAME} &>/dev/null
+  s2i usage ${sti_args} ${IMAGE_NAME} &>/dev/null
+}
+
+test_docker_run_usage() {
+  info "Testing 'docker run' usage"
+  docker run ${IMAGE_NAME} &>/dev/null
 }
 
 test_connection() {
@@ -130,7 +135,11 @@ run_sti_build
 check_result $?
 
 # Verify the 'usage' script is working properly
-test_usage
+test_s2i_usage
+check_result $?
+
+# Verify the 'usage' script is working properly when running the base image with 'docker run ...'
+test_docker_run_usage
 check_result $?
 
 # Verify that the HTTP connection can be established to test application container
