@@ -7,6 +7,11 @@ if [ "$1" = "-h" ]; then
   exec /opt/java/bin/usage
 fi
 
+if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+  echo "Restoring build artifacts"
+  mv /tmp/artifacts/* $HOME/.
+fi
+
 APP_RUNTIME_DIR="${HOME}/src"
 APP_SRC_DIR="/tmp/src"
 
