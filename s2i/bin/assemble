@@ -1,27 +1,12 @@
-#!/bin/bash -e
-#
-# Default STI assemble script for the 'springboot-maven3-centos' image.
-#
+#!/bin/bash
 
-if [ "$1" = "-h" ]; then
-  exec /opt/java/bin/usage
-fi
-
-if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
-  echo "Restoring build artifacts"
-  mv /tmp/artifacts/* $HOME/.
-fi
-
-APP_RUNTIME_DIR="${HOME}/src"
-APP_SRC_DIR="/tmp/src"
+set -e
 
 echo "---> Installing application source"
-mkdir -p ${APP_RUNTIME_DIR}
-cp -Rf ${APP_SRC_DIR}/* ${APP_RUNTIME_DIR}/
+cp -Rf /tmp/src/. ./
 
-pushd "$APP_RUNTIME_DIR/${APP_ROOT}" >/dev/null
 echo "---> Building Spring Boot application from source"
-
 mvn clean install
 
-popd >/dev/null
+# Fix source directory permissions
+fix-permissions ./

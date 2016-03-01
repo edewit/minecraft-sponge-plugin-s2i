@@ -1,11 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
 
-cd $APP_ROOT_DIR
-
-# Allow users to inspect/debug the builder image itself, by using:
-# $ docker run -i -t codecentric/springboot-maven3-centos --debug
-#
-[ "$1" == "--debug" ] && exec /bin/bash
+set -e
 
 echo "---> Starting Spring Boot application"
 java -jar `find target -name *.jar`
