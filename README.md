@@ -7,13 +7,24 @@ of the base image for deploying Spring Boot applications as reproducible Docker
 images. The resulting images can be run either by [Docker](http://docker.io)
 or using [S2I](https://github.com/openshift/source-to-image).
 
-This image is heavily inspired by the awesome [openshift/sti-ruby](https://github.com/openshift/sti-ruby/),
+This image is heavily inspired by the awesome [openshift/sti-ruby](https://github.com/openshift/sti-ruby/)
 builder images.
 
-Installation
----------------
+Usage
+---------------------
 
-_TODO_ Publish Image to Docker Hub
+To build a simple springboot-sample-app application using standalone S2I and then run the resulting image with Docker execute:
+
+```
+$ s2i build git://github.com/codecentric/springboot-sample-app codecentric/springboot-maven3-centos spring-sample-app
+$ docker run -p 8080:8080 spring-boot-app
+```
+
+**Accessing the application:**
+
+```
+$ curl 127.0.0.1:8080
+```
 
 Repository organization
 ------------------------
@@ -63,23 +74,6 @@ $ docker build -t codecentric/springboot-maven3-centos-candidate .
 
 After that you can execute `./test/run`. You can also use `make test` to
 automate this.
-
-Usage
----------------------
-
-**Building the [spring-boot-example](https://github.com/codecentric/spring-boot-example) Spring Boot application..**
-
-1. **using standalone [S2I](https://github.com/openshift/source-to-image) and running the resulting image by [Docker](http://docker.io):**
-
-```
-$ s2i build git://github.com/codecentric/spring-boot-example codecentric/springboot-maven3-centos spring-boot-app
-$ docker run -p 8080:8080 spring-boot-app
-```
-
-**Accessing the application:**
-```
-$ curl 127.0.0.1:8080
-```
 
 Copyright
 --------------------
