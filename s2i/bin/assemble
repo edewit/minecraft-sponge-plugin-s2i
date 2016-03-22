@@ -6,7 +6,11 @@ echo "---> Installing application source"
 cp -Rf /tmp/src/. ./
 
 echo "---> Building Spring Boot application from source"
-mvn clean install
+if [ -f "mvnw" ]; then
+  ./mvnw clean install
+else
+  mvn clean install
+fi
 
 # Fix source directory permissions
 fix-permissions ./
