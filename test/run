@@ -8,6 +8,11 @@
 #
 IMAGE_NAME=${IMAGE_NAME-codecentric/springboot-maven3-centos-candidate}
 
+if [ $# -eq 0 ]; then
+  echo "ERROR: No test project name has been passed."
+  exit 1
+fi
+test_project=${1}
 test_dir="$(readlink -zf $(dirname "${BASH_SOURCE[0]}"))"
 image_dir=$(readlink -zf ${test_dir}/..)
 scripts_url="file://${image_dir}/.sti/bin"
@@ -37,7 +42,7 @@ container_ip() {
 }
 
 run_s2i_build() {
-  s2i build ${sti_args} file://${test_dir}/test-app ${IMAGE_NAME} ${IMAGE_NAME}-testapp
+  s2i build ${sti_args} file://${test_dir}/${test_project} ${IMAGE_NAME} ${IMAGE_NAME}-${test_project}
 }
 
 prepare() {
@@ -48,7 +53,7 @@ prepare() {
   # TODO: STI build require the application is a valid 'GIT' repository, we
   # should remove this restriction in the future when a file:// is used.
   info "Build the test application image"
-  pushd ${test_dir}/test-app >/dev/null
+  pushd ${test_dir}/${test_project} >/dev/null
   git init
   git config user.email "build@localhost" && git config user.name "builder"
   git add -A && git commit -m "Sample commit"
@@ -56,7 +61,7 @@ prepare() {
 }
 
 run_test_application() {
-  docker run --rm --cidfile=${cid_file} -p ${test_port} ${IMAGE_NAME}-testapp
+  docker run --rm --cidfile=${cid_file} -p ${test_port} ${IMAGE_NAME}-${test_project}
 }
 
 cleanup() {
@@ -66,16 +71,16 @@ cleanup() {
       docker stop $(cat $cid_file)
     fi
   fi
-  if image_exists ${IMAGE_NAME}-testapp; then
-    docker rmi ${IMAGE_NAME}-testapp
+  if image_exists ${IMAGE_NAME}-${test_project}; then
+    docker rmi ${IMAGE_NAME}-${test_project}
   fi
-  rm -rf ${test_dir}/test-app/.git
+  rm -rf ${test_dir}/${test_project}/.git
 }
 
 check_result() {
   local result="$1"
   if [[ "$result" != "0" ]]; then
-    info "TEST FAILED (${result})"
+    info "TEST FAILED for ${test_project} (${result})"
     cleanup
     exit $result
   fi
