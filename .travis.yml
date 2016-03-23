@@ -9,8 +9,9 @@ go: 1.4
 
 install:
   - go get github.com/openshift/source-to-image
-  - cd ${GOPATH}/src/github.com/openshift/source-to-image
+  - pushd ${GOPATH}/src/github.com/openshift/source-to-image
   - export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/
   - hack/build-go.sh
+  - popd
 
 script: make test
