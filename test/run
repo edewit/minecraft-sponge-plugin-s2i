@@ -22,8 +22,8 @@ cid_file=$(mktemp -u --suffix=.cid)
 # it from Docker hub
 s2i_args="--force-pull=false"
 
-# TODO: This should be part of the image metadata
-test_port=8080
+# Read exposed port from image meta data
+test_port="$(docker inspect --format='{{range $key, $value := .ContainerConfig.ExposedPorts }}{{$key}}{{end}}' ${IMAGE_NAME} | sed 's/\/.*//')"
 
 info() {
   echo -e "\n\e[1m[INFO] $@...\e[0m\n"
