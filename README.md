@@ -55,6 +55,16 @@ $ curl 127.0.0.1:8080
     application GIT repository. In case your application is located in a
     sub-folder, you can set this variable to a *./myapplication*.
 
+*  **APP_TARGET** (default: '')
+
+    This variable specifies a relative location to your application binary inside the
+    container.
+
+*  **MVN_ARGS** (default: '')
+
+    This variable specifies the arguments for Maven inside the container.
+
+
 ## Contributing
 
 In order to test your changes to this STI image or to the STI scripts, you can use the `test/run` script. Before that, you have to build the 'candidate' image:

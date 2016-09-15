@@ -3,4 +3,6 @@
 set -e
 
 echo "---> Starting Spring Boot application"
-java -jar `find target -name *.jar`
+echo "--> # APP_TARGET = $APP_TARGET"
+echo "--> # JAVA_OPTS = $JAVA_OPTS"
+java $JAVA_OPTS -jar `find $APP_TARGET -name *.jar`
