@@ -1,19 +1,19 @@
-# springboot-maven3-centos
+# minecraft-plugin-centos
 #
-# This image provide a base for running Spring Boot based applications. It
+# This image provide a base for running minecraft plugins. It
 # provides a base Java 8 installation and Maven 3.
 
 FROM openshift/base-centos7
 
-EXPOSE 8080
+EXPOSE 25565 25575
 
 ENV JAVA_VERSON 1.8.0
 ENV MAVEN_VERSION 3.3.9
 
-LABEL io.k8s.description="Platform for building and running Spring Boot applications" \
-      io.k8s.display-name="Spring Boot Maven 3" \
-      io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,java,java8,maven,maven3,springboot"
+LABEL io.k8s.description="Platform for building and running minecraft plugins" \
+      io.k8s.display-name="Minecraft plugin server" \
+      io.openshift.expose-services="25565:tcp" \
+      io.openshift.tags="builder,java,java8,maven,maven3,minecraft,plugins"
 
 RUN yum update -y && \
   yum install -y curl && \
@@ -29,6 +29,7 @@ ENV MAVEN_HOME /usr/share/maven
 
 # Add configuration files, bashrc and other tweaks
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
+COPY ./config/ /opt/app-root/src
 
 RUN chown -R 1001:0 /opt/app-root
 USER 1001

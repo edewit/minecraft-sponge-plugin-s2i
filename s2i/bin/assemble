@@ -15,3 +15,6 @@ fi
 
 # Fix source directory permissions
 fix-permissions ./
+
+echo "Download Bungeecord server"
+wget http://ci.md-5.net/job/BungeeCord/lastSuccessfulBuild/artifact/bootstrap/target/BungeeCord.jar
