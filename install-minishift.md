@@ -4,11 +4,13 @@ Minecraft servers minishift
 The following steps should be preformed to install the everything on minishift:
 
 ```bash
- $> minishift start --cpus 4 --memory=4096
+ $> minishift config set memory 8192
+ $> minishift config set cpus 4
+ $> minishift start
  $> wget https://raw.githubusercontent.com/fabric8-launcher/launcher-openshift-templates/master/openshift/launcher-template.yaml
 ```
-Go to the minishift console and import the `launcher-template.yaml` into a new project.
-Use the following settings when you process the template:
+
+Go to the minishift console (developer/developer) and import the `launcher-template.yaml` into a new project (or My Project) using Add to Project > Import YAML/JSON.  Use the following settings when you *Process the template* (you don't have to Save the Template), after you create a [Personal access token on GitHub](https://github.com/settings/tokens) with all "repo" and "admin:repo_hook" scopes:
 
 ```
 Your GitHub username: <your github username>
