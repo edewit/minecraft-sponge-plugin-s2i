@@ -29,8 +29,14 @@ Booster Environment: <empty>
 the rest as already set preset
 ```
 
-Install che [minishift addon](https://github.com/minishift/minishift-addons/tree/master/add-ons/che)
-Deploy che from  the catalog by going to <console url> and select `eclipse-che`
+Open the launcher-frontend-myproject.192.168...nip.io, and Launch your Project, Use Continuous Delivery (NOT Build and run locally), Plugin Example, Sponge Server, set any OpenShift Project name.  This will create a repo of that name on the GitHub account you created a token for above, and a new project for it in your local OpenShift instance. 
+
+```bash
+ $> oc port-forward minecraft-server-<hash> 25565:25565
+```
+
+To edit the Minecraft plug in in an online Web IDE, you can now install the Che [minishift addon](https://github.com/minishift/minishift-addons/tree/master/add-ons/che)
+Deploy Che from the catalog by going to <console url> and select `eclipse-che`
 
 ```
 Add to Project: Create project
@@ -38,11 +44,4 @@ Project Name: mini-che
 Che service domain name: <empty>
 GitHub client ID: <your id>
 GitHub client secret: <your created secret>
-```
-
-Open the launcher go to the launcher project on minishift and open the external link e.g. http://launcher-frontend-launcher.<your ip>.nip.io
-Press next a couple of times and enter a project name e.g. `minishift-minecraft-plugin`
-  
-```bash
- $> oc port-forward minecraft-server-<hash> 25565:25565
 ```
