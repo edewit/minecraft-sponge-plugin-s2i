@@ -2,6 +2,7 @@
 
 set -e
 
+cd /opt/app-root/
 echo "--> # JAVA_OPTS = $JAVA_OPTS"
 echo "---> running server"
-java $JAVA_OPTS -jar BungeeCord.jar
+java $JAVA_OPTS -jar spongevanilla.jar

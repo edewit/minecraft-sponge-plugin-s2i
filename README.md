@@ -78,3 +78,7 @@ After that you can execute `./test/run`. You can also use `make test` to automat
 ## Copyright
 
 Released under the Apache License 2.0. See the [LICENSE](https://github.com/codecentric/springboot-maven3-centos/blob/master/LICENSE) file.
+
+
+oc new-build edewit/minecraft-plugin-centos~https://github.com/edewit/minecraft-che-test.git
+oc new-app --image-stream=minecraft-che-test
