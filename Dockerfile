@@ -1,4 +1,4 @@
-# minecraft-plugin-centos
+# minecraft-osgi-plugin-s2i
 #
 # This image provide a base for running minecraft plugins. It
 # provides a base Java 8 installation and Maven 3.
@@ -13,7 +13,7 @@ ENV MAVEN_VERSION 3.3.9
 LABEL io.k8s.description="Platform for building and running minecraft plugins" \
       io.k8s.display-name="Minecraft plugin server" \
       io.openshift.expose-services="25565:tcp" \
-      io.openshift.tags="builder,java,java8,maven,maven3,minecraft,plugins"
+      io.openshift.tags="builder,java,java8,maven,maven3,minecraft,plugins,osgi"
 
 RUN yum update -y && \
   yum install -y curl && \
