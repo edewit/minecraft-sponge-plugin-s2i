@@ -9,7 +9,7 @@ This repository contains the sources and [Dockerfile](https://github.com/edewit/
 To build a simple sponge minecraft plugin using standalone S2I and then run the resulting image with Docker execute:
 
 ```
-$ s2i build git@github.com:edewit/minecraft-sample-plugin.git edewit/minecraft-plugin-centos minecraft-sample-plugin
+$ s2i build git@github.com:edewit/minecraft-sample-plugin.git edewit/minecraft-sponge-plugin-s2i minecraft-sample-plugin
 $ docker run -p 25565:25565 minecraft-sample-plugin
 ```
 

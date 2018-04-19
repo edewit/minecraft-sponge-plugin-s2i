@@ -1,4 +1,4 @@
-IMAGE_NAME = edewit/minecraft-plugin-centos
+IMAGE_NAME = edewit/minecraft-sponge-plugin-s2i
 
 build:
 	docker build -t $(IMAGE_NAME) .

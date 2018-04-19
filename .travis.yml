@@ -17,4 +17,4 @@ install:
 
 script:
   - make
-  - s2i build https://github.com/edewit/minecraft-sample-plugin.git edewit/minecraft-plugin-centos minecraft-sample-plugin
+  - s2i build https://github.com/edewit/minecraft-sample-plugin.git edewit/minecraft-sponge-plugin-s2i minecraft-sample-plugin

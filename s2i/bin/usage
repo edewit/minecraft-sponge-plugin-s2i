@@ -6,7 +6,7 @@ To use it, install STI: https://github.com/openshift/source-to-image
 
 Sample invocation:
 
-s2i build git@github.com:edewit/minecraft-sample-plugin.git edewit/minecraft-plugin-centos minecraft-sample-plugin
+s2i build git@github.com:edewit/minecraft-sample-plugin.git edewit/minecraft-sponge-plugin-s2i minecraft-sample-plugin
 
 
 You can then run the resulting image via:
