@@ -1,5 +1,7 @@
 # S2I Sponge Minecraft Plugin Image
 
+[![Build Status](https://travis-ci.org/edewit/minecraft-sponge-plugin-s2i.svg?branch=master)](https://travis-ci.org/edewit/minecraft-sponge-plugin-s2i)
+
 This repository contains the sources and [Dockerfile](https://github.com/edewit/minecraft-sponge-plugin-s2i/blob/master/Dockerfile) of the base image for deploying Sponge Minecraft plugins as reproducible Docker images. The resulting images can be run either by [Docker](http://docker.io) or using [S2I](https://github.com/openshift/source-to-image).
 
 ## Usage
