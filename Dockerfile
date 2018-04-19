@@ -27,9 +27,6 @@ RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/bina
 ENV JAVA_HOME /usr/lib/jvm/java
 ENV MAVEN_HOME /usr/share/maven
 
-# Add Minecraft plugins built by Makefile
-COPY ./build/*.jar /opt/app-root/mods/
-
 # Add configuration files, bashrc and other tweaks
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 COPY ./config/ /opt/app-root/
