@@ -5,13 +5,13 @@ services:
 
 language: go
 
-go: 1.6
+go: 1.7.x
 
 install:
-  - export GOPATH=`pwd`
   - go get github.com/openshift/source-to-image
   - pushd ${GOPATH}/src/github.com/openshift/source-to-image
   - export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/
+  - hack/install-tools.sh
   - hack/build-go.sh
   - popd
 
