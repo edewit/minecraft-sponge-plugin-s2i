@@ -1,4 +1,4 @@
-# minecraft-plugin-centos
+# minecraft-sponge-plugin-s2i
 #
 # This image provide a base for running minecraft plugins. It
 # provides a base Java 8 installation and Maven 3.
@@ -27,22 +27,9 @@ RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/bina
 ENV JAVA_HOME /usr/lib/jvm/java
 ENV MAVEN_HOME /usr/share/maven
 
-# Add Minecraft plugins built by Makefile
-COPY ./build/*.jar /opt/app-root/mods/
-
 # Add configuration files, bashrc and other tweaks
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 COPY ./config/ /opt/app-root/
-
-COPY ./server/ /opt/app-root
-ADD http://search.maven.org/remotecontent?filepath=com/google/guava/guava/18.0/guava-18.0.jar /opt/app-root/osgi/boot/3_guava-18.0.jar
-ADD http://search.maven.org/remotecontent?filepath=com/google/guava/guava/19.0/guava-19.0.jar /opt/app-root/osgi/boot/3_guava-19.0.jar
-ADD http://search.maven.org/remotecontent?filepath=com/google/guava/guava/20.0/guava-20.0.jar /opt/app-root/osgi/boot/3_guava-20.0.jar
-ADD http://search.maven.org/remotecontent?filepath=org/apache/felix/org.apache.felix.log/1.0.1/org.apache.felix.log-1.0.1.jar /opt/app-root/osgi/boot/1_org.apache.felix.log-1.0.1.jar
-ADD http://search.maven.org/remotecontent?filepath=org/everit/osgi/org.everit.osgi.loglistener.slf4j/1.0.0/org.everit.osgi.loglistener.slf4j-1.0.0.jar /opt/app-root/osgi/boot/2_org.everit.osgi.loglistener.slf4j-1.0.0.jar
-ADD http://search.maven.org/remotecontent?filepath=org/eclipse/xtext/org.eclipse.xtext.xbase.lib/2.10.0/org.eclipse.xtext.xbase.lib-2.10.0.jar /opt/app-root/osgi/boot/3_org.eclipse.xtext.xbase.lib-2.10.0.jar
-ADD http://search.maven.org/remotecontent?filepath=org/eclipse/xtend/org.eclipse.xtend.lib.macro/2.10.0/org.eclipse.xtend.lib.macro-2.10.0.jar /opt/app-root/osgi/boot/3_org.eclipse.xtend.lib.macro-2.10.0.jar
-ADD http://search.maven.org/remotecontent?filepath=org/eclipse/xtend/org.eclipse.xtend.lib/2.10.0/org.eclipse.xtend.lib-2.10.0.jar /opt/app-root/osgi/boot/3_org.eclipse.xtend.lib-2.10.0.jar
 
 ADD https://s3.amazonaws.com/Minecraft.Download/versions/1.10.2/minecraft_server.1.10.2.jar /opt/app-root/minecraft_server.1.10.2.jar
 ADD https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/1.10.2-5.1.0-BETA-374/spongevanilla-1.10.2-5.1.0-BETA-374.jar /opt/app-root/spongevanilla.jar

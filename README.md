@@ -1,24 +1,14 @@
-# Spring Boot - Maven 3 - CentOS Docker image
+# S2I Sponge Minecraft Plugin Image
 
-[![Build Status](https://travis-ci.org/codecentric/springboot-maven3-centos.svg?branch=master)](https://travis-ci.org/codecentric/springboot-maven3-centos)
-
-This repository contains the sources and [Dockerfile](https://github.com/codecentric/springboot-maven3-centos/blob/master/Dockerfile) of the base image for deploying Spring Boot applications as reproducible Docker images. The resulting images can be run either by [Docker](http://docker.io) or using [S2I](https://github.com/openshift/source-to-image).
-
-This image is heavily inspired by the awesome [openshift/sti-ruby](https://github.com/openshift/sti-ruby/) builder images.
+This repository contains the sources and [Dockerfile](https://github.com/edewit/minecraft-sponge-plugin-s2i/blob/master/Dockerfile) of the base image for deploying Sponge Minecraft plugins as reproducible Docker images. The resulting images can be run either by [Docker](http://docker.io) or using [S2I](https://github.com/openshift/source-to-image).
 
 ## Usage
 
-To build a simple springboot-sample-app application using standalone S2I and then run the resulting image with Docker execute:
+To build a simple sponge minecraft plugin using standalone S2I and then run the resulting image with Docker execute:
 
 ```
-$ s2i build git://github.com/codecentric/springboot-sample-app codecentric/springboot-maven3-centos springboot-sample-app
-$ docker run -p 8080:8080 springboot-sample-app
-```
-
-**Accessing the application:**
-
-```
-$ curl 127.0.0.1:8080
+$ s2i build git@github.com:edewit/minecraft-sample-plugin.git edewit/minecraft-plugin-centos minecraft-sample-plugin
+$ docker run -p 25565:25565 minecraft-sample-plugin
 ```
 
 ## Repository organization
@@ -31,14 +21,12 @@ $ curl 127.0.0.1:8080
 
       Is used to restore the build artifacts from the previous built (in case of
       'incremental build'), to install the sources into location from where the
-      application will be run and prepare the application for deployment (eg.
-      using maven to build the application etc..)
+      server will be run and build the plugin (eg.
+      using maven to build the plugin etc..)
 
   *   **run**
 
-      This script is responsible for running a Spring Boot fat jar using `java -jar`.
-      The image exposes port 8080, so it expects application to listen on port
-      8080 for incoming request.
+      This script is responsible for running a minecraft sponge server using `java -jar`.
 
   *   **save-artifacts**
 
@@ -48,17 +36,6 @@ $ curl 127.0.0.1:8080
       `/opt/java/.m2` directory.
 
 ## Environment variables
-
-*  **APP_ROOT** (default: '.')
-
-    This variable specifies a relative location to your application inside the
-    application GIT repository. In case your application is located in a
-    sub-folder, you can set this variable to a *./myapplication*.
-
-*  **APP_TARGET** (default: '')
-
-    This variable specifies a relative location to your application binary inside the
-    container.
 
 *  **MVN_ARGS** (default: '')
 
@@ -70,15 +47,11 @@ $ curl 127.0.0.1:8080
 In order to test your changes to this STI image or to the STI scripts, you can use the `test/run` script. Before that, you have to build the 'candidate' image:
 
 ```
-$ docker build -t codecentric/springboot-maven3-centos-candidate .
+$ make
 ```
 
 After that you can execute `./test/run`. You can also use `make test` to automate this.
 
 ## Copyright
 
-Released under the Apache License 2.0. See the [LICENSE](https://github.com/codecentric/springboot-maven3-centos/blob/master/LICENSE) file.
-
-
-oc new-build edewit/minecraft-plugin-centos~https://github.com/edewit/minecraft-che-test.git
-oc new-app --image-stream=minecraft-che-test
+Released under the Apache License 2.0. See the [LICENSE](https://github.com/edewit/minecraft-sponge-plugin-s2i/blob/master/LICENSE) file.
