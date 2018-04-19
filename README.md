@@ -43,6 +43,9 @@ $ docker run -p 25565:25565 minecraft-sample-plugin
 
     This variable specifies the arguments for Maven inside the container.
 
+*  **GRADLE_ARGS** (default: '')
+
+    This variable specifies the arguments for Gradle inside the container.
 
 ## Contributing
 
