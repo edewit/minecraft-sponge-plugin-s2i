@@ -17,8 +17,8 @@ if [ -f "./pom.xml" ]; then
   fix-permissions ./
   cp ./target/*.jar ../mods/
 elif [ -f "./build.gradle" ]; then
-  echo "Running './gradlew ${GRADLE_ARGS}'"
-  ./gradlew install ${GRADLE_ARGS}
+  echo "Running './gradlew build install ${GRADLE_ARGS}'"
+  ./gradlew build install ${GRADLE_ARGS}
 
   fix-permissions ./
   cp ./build/libs/*.jar ../mods/
