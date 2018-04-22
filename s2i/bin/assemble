@@ -3,16 +3,23 @@
 set -e
 
 cp -Rf /tmp/src/. ./
+mkdir ../mods/
 
-echo "---> Building plugin from source"
-echo "--> # MVN_ARGS = $MVN_ARGS"
-if [ -f "mvnw" ]; then
-  ./mvnw clean install $MVN_ARGS
-else
-  mvn clean install $MVN_ARGS
+if [ -f "./pom.xml" ]; then
+  echo "---> Building plugin from source"
+  echo "--> # MVN_ARGS = $MVN_ARGS"
+  if [ -f "mvnw" ]; then
+    ./mvnw clean install $MVN_ARGS
+  else
+    mvn clean install $MVN_ARGS
+  fi
+
+  fix-permissions ./
+  cp ./target/*.jar ../mods/
+elif [ -f "./build.gradle" ]; then
+  echo "Running './gradlew build install ${GRADLE_ARGS}'"
+  ./gradlew build install ${GRADLE_ARGS}
+
+  fix-permissions ./
+  cp ./build/libs/*.jar ../mods/
 fi
-
-fix-permissions ./
-
-mkdir /opt/app-root/mods/
-cp ./target/*.jar /opt/app-root/mods/
