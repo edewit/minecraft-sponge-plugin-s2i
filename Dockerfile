@@ -48,5 +48,8 @@ RUN echo "eula=true" > /opt/app-root/eula.txt
 RUN chgrp -R 0 /opt/app-root && chmod -R g=u /opt/app-root
 USER 1001
 
+COPY pom.xml /tmp/
+RUN mvn install -f /tmp/pom.xml
+
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage
