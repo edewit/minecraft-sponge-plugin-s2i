@@ -29,9 +29,9 @@ Booster Environment: <empty>
 the rest as already set preset
 ```
 
-Open the launcher-frontend-myproject.192.168...nip.io, and Launch your Project, Use Continuous Delivery (NOT Build and run locally), Plugin Example, Sponge Server, set any OpenShift Project name.  This will create a repo of that name on the GitHub account you created a token for above, and a new project for it in your local OpenShift instance. 
+If the launcher-backend fails to start ("The container launcher-backend is crashing frequently. It must wait before it will be restarted again." & Pods Container Log "Crash loop back off") then go to the launcher-backend deployment and remove both its Readiness & Liveness Probes.  Additionally, you may also be able to make it restart faster if you Edit the Deployment to change the Strategy Type from Rolling to Recreate.
 
-If the `minecraft-server-...` deployment fails to become Active, then Edit its Health Checks and delete its Readiness Probe.
+Open the launcher-frontend-myproject.192.168...nip.io, and Launch your Project, Use Continuous Delivery (NOT Build and run locally), Plugin Example, Sponge Server, set any OpenShift Project name.  This will create a repo of that name on the GitHub account you created a token for above, and a new project for it in your local OpenShift instance. 
 
 Forward the Minecraft port from your localhost into Minishift, but first change to your new project first:
 
