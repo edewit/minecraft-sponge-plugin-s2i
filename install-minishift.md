@@ -53,7 +53,7 @@ minishift addons apply che
 
 If apply not work, then deploy Che from the catalog by going to <console url> and select `eclipse-che`.  
  
-Now open che-mini-che.192.168...nip.io, and Add or Import Project (the one wthich the launcher created earlier), from Git (connect your GitHub account is broken, in Che 6.3.0), Create, Open in IDE.
+Now open che-mini-che.192.168...nip.io, and Add or Import Project (the one wthich the launcher created earlier), from Git (as [connect your GitHub account is broken](https://github.com/eclipse/che/issues/10758)), Create, Open in IDE.
 
 ```
 Add to Project: Create project
