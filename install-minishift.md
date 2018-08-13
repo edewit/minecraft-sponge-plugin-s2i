@@ -37,6 +37,7 @@ Forward the Minecraft port from your localhost into Minishift, but first change 
 
 ```bash
  $> oc project test-minecraft
+ $> oc get pods
  $> oc port-forward minecraft-server-<hash> 25565:25565
 ```
 
