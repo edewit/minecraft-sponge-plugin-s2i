@@ -33,8 +33,6 @@ If the launcher-backend fails to start ("The container launcher-backend is crash
 
 Open the launcher-frontend-myproject.192.168...nip.io, and Launch your Project, Use Continuous Delivery (NOT Build and run locally), Plugin Example, Sponge Server, set any OpenShift Project name.  This will create a repo of that name on the GitHub account you created a token for above, and a new project for it in your local OpenShift instance. 
 
-If the `minecraft-server-...` deployment fails to become Active, then Edit its Health Checks and delete its Readiness Probe.
-
 Forward the Minecraft port from your localhost into Minishift, but first change to your new project first:
 
 ```bash
