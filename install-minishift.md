@@ -41,13 +41,9 @@ Forward the Minecraft port from your localhost into Minishift, but first change 
  $> oc port-forward minecraft-server-<hash> 25565:25565
 ```
 
-To edit the Minecraft plug in in an online Web IDE, you can now install the Che [minishift addon](https://github.com/minishift/minishift-addons/tree/master/add-ons/che):
+To edit the Minecraft plug in in an online Web IDE, you can now install Che:
 
 ```
-git clone git@github.com:minishift/minishift-addons.git
-cd minishift-addons
-minishift addons install add-ons/che
-minishift addons enable che
 minishift addons apply che
 ```
 
